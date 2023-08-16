@@ -8,6 +8,8 @@ app.listen(port,function(){ // callback function
 require("./src/db/datatabase");
 app.set("view engine","ejs");
 app.use(express.static("public"));
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
 
 const webrouter = require("./src/routes/web");
 app.use("/",webrouter); 
