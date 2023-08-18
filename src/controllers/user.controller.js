@@ -19,3 +19,22 @@ exports.postRegister = async (req,res)=>{
     }
     
 }
+
+exports.postLogin = async (req,res)=>{
+    try{
+        const email = req.body.email;
+        const u = await User.findOne({email:email});// User.find({email:email});
+        if(u ==null){
+            res.send("Email or Password is not correct");
+            return;
+        }
+        const verify = await bcrypt.compare(req.body.password,u.password);
+        if(!verify){
+            res.send("Email or Password is not correct");
+            return;
+        }
+        res.send("Loggin Done");
+    }catch(err){
+        res.send(err);
+    }
+}
