@@ -12,8 +12,8 @@ exports.formCreate = (req,res)=>{
     res.render("product/form",{product:data});
 }
 exports.store = async (req,res)=>{
+    const data = req.body;
     try {
-        const data = req.body;
         const p = new Product(data);
         await p.save();
         res.redirect("/product");
