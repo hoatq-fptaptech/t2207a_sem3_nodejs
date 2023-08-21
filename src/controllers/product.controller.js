@@ -1,4 +1,5 @@
 const Product = require("./../models/product.model");
+const fs = require("fs");
 exports.list = async (req,res)=>{
     try {
         const rs = await Product.find();
@@ -13,7 +14,17 @@ exports.formCreate = (req,res)=>{
 }
 exports.store = async (req,res)=>{
     const data = req.body;
+    const file = req.file;
+    // console.log(file);
+    if(file){
+        const img = fs.readFileSync(file.path);
+        data.thumbnail = {
+            contentType: file.mimetype,
+            data:img.toString("base64")
+        }
+    }
     try {
+        // data.thumbnail = `/uploads/${file.filename}`;
         const p = new Product(data);
         await p.save();
         res.redirect("/product");

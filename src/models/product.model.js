@@ -13,8 +13,8 @@ const product_schema = new mongoose.Schema({
     },
     description:String,
     thumbnail:{
-        type: String,
-        required:true
+        data:String,
+        contentType:String
     }
     
 });
