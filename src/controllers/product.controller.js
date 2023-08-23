@@ -1,8 +1,9 @@
 const Product = require("./../models/product.model");
+const Category = require("./../models/category.model");
 const fs = require("fs");
 exports.list = async (req,res)=>{
     try {
-        const rs = await Product.find();
+        const rs = await Product.find().populate('category').exec();
         res.render("product/list",{products:rs});
     } catch (error) {
         
@@ -38,11 +39,12 @@ exports.store = async (req,res)=>{
 exports.formEdit = async (req,res)=>{
     const _id = req.params.id;
     try {
-        const product = await Product.findById(_id);
+        const product = await Product.findById(_id).populate("category").exec();
         product.url = req._parsedOriginalUrl.path;
         res.render("product/form",{product:product});
     } catch (error) {
-        res.redirect("/product");
+        res.send(error);
+        // res.redirect("/product");
     }
     
 }
