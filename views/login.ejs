@@ -10,11 +10,8 @@
 <body>
     <section>
         <div class="container">
-            <form action="/auth/register" method="post">
-                <div class="mb-3">
-                    <label for="exampleInputName" class="form-label">Full Name</label>
-                    <input type="text" name="fullname" class="form-control" id="exampleInputName">
-                  </div>
+            <form action="/auth/login" method="post">
+               
                 <div class="mb-3">
                   <label for="exampleInputEmail1" class="form-label">Email address</label>
                   <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
@@ -24,13 +21,7 @@
                   <label for="exampleInputPassword1" class="form-label">Password</label>
                   <input type="password" name="password" class="form-control" id="exampleInputPassword1">
                 </div>
-                <div class="mb-3">
-                  <label class="form-label">Role</label>
-                  <select name="role" class="form-control">
-                    <option value="user">User</option>
-                    <option value="admin">Admin</option>
-                  </select>
-                </div>
+               
               
                 <button type="submit" class="btn btn-primary">Submit</button>
               </form>

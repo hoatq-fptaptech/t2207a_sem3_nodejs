@@ -19,7 +19,9 @@ exports.postRegister = async (req,res)=>{
     }
     
 }
-
+exports.login = (req,res)=>{
+    res.render("login");
+}
 exports.postLogin = async (req,res)=>{
     try{
         const email = req.body.email;
@@ -33,6 +35,11 @@ exports.postLogin = async (req,res)=>{
             res.send("Email or Password is not correct");
             return;
         }
+        req.session.auth = {
+            fullname: u.fullname,
+            email: u.email,
+            role: u.role
+        };
         res.send("Loggin Done");
     }catch(err){
         res.send(err);
