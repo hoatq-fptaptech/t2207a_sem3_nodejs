@@ -1,5 +1,6 @@
 const User = require("./../models/user.model");
 const bcrypt = require("bcryptjs");
+const gmail = require("./../mails/gmail");
 exports.register = (req,res)=>{
     res.render("register");
 }
@@ -13,6 +14,16 @@ exports.postRegister = async (req,res)=>{
         data.password = hashed;
         const u = new User(data);
         await u.save();
+        // send email 
+        gmail.sendMail({
+            from:"Thỏ con xinh xắn",
+            to: u.email,// u.email
+            cc: "",
+            bcc: "",
+            subject: "Welcome",
+            html: "<h1>Chào mừng bạn gia nhập cộng đồng học lại NodeJS</h1>"
+        });    
+        // end
         res.send("DONE");
     }catch(err){
         res.send(err);
